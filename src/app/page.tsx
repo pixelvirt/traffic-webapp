@@ -1,5 +1,5 @@
-import CameraCard from '@/components/CameraCard'
-import Sidebar from '@/components/Sidebar'
+import CameraCard from '@/app/ui/components/CameraCard'
+import Sidebar from '@/app/ui/sidebar/Sidebar'
 
 type Camera = {
   name: string
@@ -30,7 +30,7 @@ let cameras: Camera[] = [
   },
 ]
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className='flex'>
       <Sidebar />

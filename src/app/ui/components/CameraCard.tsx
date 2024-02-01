@@ -13,15 +13,15 @@ const CameraCard = ({
   source: string | undefined
 }) => {
   return (
-    <div className='flex max-h-min cursor-pointer flex-col gap-2 rounded-md p-4 hover:bg-slate-700'>
-      <div className='aspect-video border'>
+    <div className='hover:bg-primary-100 border-primary-100 flex max-h-min cursor-pointer flex-col gap-2 rounded-md border p-4'>
+      <div className='aspect-video'>
         <VideoPlayer videoSource={source} />
       </div>
       <div>
-        <p className='flex items-center text-sm gap-2'>
+        <p className='flex items-center gap-2 text-sm'>
           <VideocamIcon /> <span>{cameraName}</span>
         </p>
-        <p className='flex items-center text-sm gap-2'>
+        <p className='flex items-center gap-2 text-sm'>
           <LanIcon /> {ipAddress}
         </p>
       </div>
