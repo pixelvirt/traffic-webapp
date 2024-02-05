@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/app/ui/components/Navbar'
+import { Flip, ToastContainer } from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
 
 const roboto = Roboto({ weight: ['400', '500'], subsets: ['latin'] })
 
@@ -19,7 +21,10 @@ export default function RootLayout({
     <html lang='en'>
       <body className={roboto.className}>
         <Navbar />
-        <main>{children}</main>
+        <main>
+          <ToastContainer transition={Flip} />
+          {children}
+        </main>
       </body>
     </html>
   )

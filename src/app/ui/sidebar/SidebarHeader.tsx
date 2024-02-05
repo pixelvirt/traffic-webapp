@@ -8,9 +8,8 @@ import Typography from '@mui/material/Typography'
 import { alpha, styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import InputLabel from '@mui/material/InputLabel'
-import TextField, { TextFieldProps } from '@mui/material/TextField'
 import FormControl from '@mui/material/FormControl'
-import { OutlinedInputProps } from '@mui/material/OutlinedInput'
+import { addJunction } from '@/app/lib/data'
 
 const modalStyle = {
   position: 'absolute' as 'absolute',
@@ -27,7 +26,7 @@ const modalStyle = {
 const BootstrapFormControl = styled(FormControl)(({ theme }) => ({
   '&:focus-within': {
     '& .MuiInputLabel-root': {
-      color: '#fff', // Change this to the color you want
+      color: '#fff',
     },
   },
 }))
@@ -59,17 +58,28 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }))
 
-const SidebarHeader = () => {
+const SidebarHeader = ({
+  onAddJunction,
+}: {
+  onAddJunction: () => Promise<void>
+}) => {
   const [showModal, setShowModal] = React.useState(false)
-
   const handleOpenModal = () => {
-    console.log('open modal')
     setShowModal(true)
   }
 
   const handleCloseModal = () => {
-    console.log('close modal')
     setShowModal(false)
+  }
+
+  const handleSubmit = async (formData: FormData) => {
+    const rawFormData = {
+      junctionName: formData.get('junction-name'),
+    }
+
+    addJunction({ junctionName: rawFormData.junctionName as string })
+      .then(onAddJunction)
+      .finally(() => handleCloseModal())
   }
 
   return (
@@ -95,27 +105,32 @@ const SidebarHeader = () => {
         }}
       >
         <Box sx={modalStyle}>
-          <Typography
-            id='modal-modal-title'
-            variant='h6'
-            component='h2'
-            className='mb-4'
-          >
-            Add a Junction
-          </Typography>
-          <BootstrapFormControl variant='standard'>
-            <InputLabel
-              shrink
-              htmlFor='junction-name'
-              className=' text-white/60'
+          <form action={handleSubmit}>
+            <Typography
+              id='modal-modal-title'
+              variant='h6'
+              component='h2'
+              className='mb-4'
             >
-              Junction Name
-            </InputLabel>
-            <BootstrapInput id='junction-name' />
-            <button className='mt-4 rounded-lg border border-[#1a1a1a] bg-[#ededed] px-4 py-2 text-[#0a0a0a] hover:bg-[#ccc]'>
-              Add Junction
-            </button>
-          </BootstrapFormControl>
+              Add a Junction
+            </Typography>
+            <BootstrapFormControl variant='standard'>
+              <InputLabel
+                shrink
+                htmlFor='junction-name'
+                className=' text-white/60'
+              >
+                Junction Name
+              </InputLabel>
+              <BootstrapInput name='junction-name' id='junction-name' />
+              <button
+                className='mt-4 rounded-lg border border-[#1a1a1a] bg-[#ededed] px-4 py-2 font-medium text-[#0a0a0a] hover:bg-[#ccc]'
+                type='submit'
+              >
+                Add Junction
+              </button>
+            </BootstrapFormControl>
+          </form>
         </Box>
       </Modal>
     </div>

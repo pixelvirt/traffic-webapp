@@ -1,12 +1,27 @@
+'use server'
+
+const backend_url = process.env.BACKEND_URL
+
 export async function fetchAllJunctions() {
-  const response = await fetch('http://localhost:5001/junctions', {
+  return await fetch(`${backend_url}/junctions`, {
     cache: 'no-store',
   })
+    .then((res) => {
+      return res.json()
+    })
+    .catch((error) => {
+      return error
+    })
+}
 
-  if (!response.ok) {
-    console.log('Failed to fetch data')
-    throw new Error('Failed to fetch data')
-  }
-
-  return response.json()
+export async function addJunction({ junctionName }: { junctionName: string }) {
+  fetch(`${backend_url}/junctions`, {
+    method: 'POST',
+    body: JSON.stringify({
+      name: junctionName,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 }
