@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import AddIcon from '@mui/icons-material/Add'
+// import AddIcon from '@mui/icons-material/Add'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -61,7 +61,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 const SidebarHeader = ({
   onAddJunction,
 }: {
-  onAddJunction: () => Promise<void>
+  onAddJunction?: () => Promise<void>
 }) => {
   const [showModal, setShowModal] = React.useState(false)
   const handleOpenModal = () => {
@@ -85,13 +85,13 @@ const SidebarHeader = ({
   return (
     <div className='flex items-center'>
       <h1 className='flex-1 text-lg font-medium'>Junctions</h1>
-      <button
+      {/* <button
         className='inline-flex rounded-md bg-white px-1 py-1 text-sm text-black'
         type='submit'
         onClick={handleOpenModal}
       >
         <AddIcon />
-      </button>
+      </button> */}
       <Modal
         open={showModal}
         onClose={handleCloseModal}
