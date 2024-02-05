@@ -10,11 +10,11 @@ const Sidebar = async () => {
   return (
     <aside className='sticky top-16 h-[calc(100dvh-4rem)] min-w-64 border-r-2 border-[#2e2e2e] py-6 pl-5 pr-2'>
       <SidebarHeader />
-      <div className='flex flex-col gap-2'>
+      <div className='mt-6 flex flex-col gap-2'>
         {junctions.map((junction) => (
           <Link
             key={junction.id}
-            className='w-full cursor-pointer rounded-md px-2 py-2 hover:bg-slate-800'
+            className='w-full cursor-pointer rounded-md px-3 py-2 hover:bg-[#1a1a1a]'
             href={`/junctions/${junction.id}`}
           >
             {junction.name}
