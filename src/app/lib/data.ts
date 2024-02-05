@@ -10,7 +10,6 @@ export async function fetchAllJunctions() {
       return res.json()
     })
     .catch((error) => {
-      console.error('Error:', error)
       return error
     })
 }
@@ -25,6 +24,4 @@ export async function addJunction({ junctionName }: { junctionName: string }) {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => console.log(response.body))
-    .catch((error) => console.error('Error:', error))
 }

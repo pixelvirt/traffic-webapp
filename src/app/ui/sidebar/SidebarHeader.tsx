@@ -58,7 +58,11 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
   },
 }))
 
-const SidebarHeader = () => {
+const SidebarHeader = ({
+  onAddJunction,
+}: {
+  onAddJunction: () => Promise<void>
+}) => {
   const [showModal, setShowModal] = React.useState(false)
   const handleOpenModal = () => {
     setShowModal(true)
@@ -73,7 +77,9 @@ const SidebarHeader = () => {
       junctionName: formData.get('junction-name'),
     }
 
-    await addJunction({ junctionName: rawFormData.junctionName as string })
+    addJunction({ junctionName: rawFormData.junctionName as string })
+      .then(onAddJunction)
+      .finally(() => handleCloseModal())
   }
 
   return (
