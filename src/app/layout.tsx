@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/app/ui/components/Navbar'
+import Navbar from '@/ui/components/Navbar'
 import { Flip, ToastContainer } from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
 

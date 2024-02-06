@@ -25,3 +25,17 @@ export async function addJunction({ junctionName }: { junctionName: string }) {
     },
   })
 }
+
+export async function getCameras({ junctionId }: { junctionId: string }) {
+  const res = await fetch(`${backend_url}/junctions/${junctionId}/cameras`, {
+    next: {
+      revalidate: 3600,
+    },
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+
+  return res.json()
+}
