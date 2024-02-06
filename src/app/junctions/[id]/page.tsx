@@ -1,7 +1,7 @@
 'use client'
 
-import { getCameras } from '@/app/lib/data'
-import CameraCard from '@/app/ui/components/CameraCard'
+import { getCameras } from '@/lib/data'
+import CameraCard from '@/ui/components/CameraCard'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
@@ -29,13 +29,11 @@ export default function JunctionCameras() {
 
   return (
     <div className='grid w-full grid-flow-row auto-rows-min grid-cols-3 gap-3 px-5 pt-5'>
-      {
-        cameras.length === 0 && (
-          <div className='col-span-3 text-center text-2xl font-bold'>
-            No cameras found
-          </div>
-        )
-      }
+      {cameras.length === 0 && (
+        <div className='col-span-3 text-center text-2xl font-bold'>
+          No cameras found
+        </div>
+      )}
       {cameras.map((camera) => (
         <CameraCard
           key={camera.id}

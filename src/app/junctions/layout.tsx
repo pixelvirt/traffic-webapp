@@ -1,4 +1,4 @@
-import Sidebar from '@/app/ui/sidebar/Sidebar'
+import Sidebar from '@/ui/sidebar/Sidebar'
 
 export default async function Layouts({
   children,

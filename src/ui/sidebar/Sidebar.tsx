@@ -1,7 +1,7 @@
 'use client'
 
-import { fetchAllJunctions } from '@/app/lib/data'
-import { Junction } from '@/app/lib/definitions'
+import { fetchAllJunctions } from '@/lib/data'
+import { Junction } from '@/lib/definitions'
 import Link from 'next/link'
 import React from 'react'
 import SidebarHeader from './SidebarHeader'
