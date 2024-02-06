@@ -1,86 +1,84 @@
-'use client'
-
 import React from 'react'
 // import AddIcon from '@mui/icons-material/Add'
-import Modal from '@mui/material/Modal'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+// import Modal from '@mui/material/Modal'
+// import Box from '@mui/material/Box'
+// import Typography from '@mui/material/Typography'
 import { alpha, styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
-import { addJunction } from '@/app/lib/data'
+// import { addJunction } from '@/app/lib/data'
 
-const modalStyle = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  bgcolor: '#000',
-  border: '1px solid hsla(0, 0%, 100%, 0.145)',
-  borderRadius: '0.5rem',
-  boxShadow: 24,
-  padding: '12px 24px 24px',
-}
+// const modalStyle = {
+//   position: 'absolute' as 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   bgcolor: '#000',
+//   border: '1px solid hsla(0, 0%, 100%, 0.145)',
+//   borderRadius: '0.5rem',
+//   boxShadow: 24,
+//   padding: '12px 24px 24px',
+// }
 
-const BootstrapFormControl = styled(FormControl)(({ theme }) => ({
-  '&:focus-within': {
-    '& .MuiInputLabel-root': {
-      color: '#fff',
-    },
-  },
-}))
+// const BootstrapFormControl = styled(FormControl)(({ theme }) => ({
+//   '&:focus-within': {
+//     '& .MuiInputLabel-root': {
+//       color: '#fff',
+//     },
+//   },
+// }))
 
-const BootstrapInput = styled(InputBase)(({ theme }) => ({
-  'label + &': {
-    marginTop: theme.spacing(3),
-  },
-  '& .MuiInputBase-input': {
-    position: 'relative',
-    backgroundColor: '#1A1A1A',
-    border: '1px solid',
-    borderColor: '#1a1a1a',
-    borderRadius: '8px',
-    color: '#fff',
-    fontSize: 16,
-    width: 'auto',
-    padding: '10px 12px',
-    transition: theme.transitions.create([
-      'border-color',
-      'background-color',
-      'box-shadow',
-    ]),
+// const BootstrapInput = styled(InputBase)(({ theme }) => ({
+//   'label + &': {
+//     marginTop: theme.spacing(3),
+//   },
+//   '& .MuiInputBase-input': {
+//     position: 'relative',
+//     backgroundColor: '#1A1A1A',
+//     border: '1px solid',
+//     borderColor: '#1a1a1a',
+//     borderRadius: '8px',
+//     color: '#fff',
+//     fontSize: 16,
+//     width: 'auto',
+//     padding: '10px 12px',
+//     transition: theme.transitions.create([
+//       'border-color',
+//       'background-color',
+//       'box-shadow',
+//     ]),
 
-    '&:focus': {
-      boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
-    },
-  },
-}))
+//     '&:focus': {
+//       boxShadow: `${alpha(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+//       borderColor: theme.palette.primary.main,
+//     },
+//   },
+// }))
 
 const SidebarHeader = ({
   onAddJunction,
 }: {
   onAddJunction?: () => Promise<void>
 }) => {
-  const [showModal, setShowModal] = React.useState(false)
-  const handleOpenModal = () => {
-    setShowModal(true)
-  }
+  // const [showModal, setShowModal] = React.useState(false)
+  // const handleOpenModal = () => {
+  //   setShowModal(true)
+  // }
 
-  const handleCloseModal = () => {
-    setShowModal(false)
-  }
+  // const handleCloseModal = () => {
+  //   setShowModal(false)
+  // }
 
-  const handleSubmit = async (formData: FormData) => {
-    const rawFormData = {
-      junctionName: formData.get('junction-name'),
-    }
+  // const handleSubmit = async (formData: FormData) => {
+  //   const rawFormData = {
+  //     junctionName: formData.get('junction-name'),
+  //   }
 
-    addJunction({ junctionName: rawFormData.junctionName as string })
-      .then(onAddJunction)
-      .finally(() => handleCloseModal())
-  }
+  //   addJunction({ junctionName: rawFormData.junctionName as string })
+  //     .then(onAddJunction)
+  //     .finally(() => handleCloseModal())
+  // }
 
   return (
     <div className='flex items-center'>
@@ -92,7 +90,7 @@ const SidebarHeader = ({
       >
         <AddIcon />
       </button> */}
-      <Modal
+      {/* <Modal
         open={showModal}
         onClose={handleCloseModal}
         slotProps={{
@@ -132,7 +130,7 @@ const SidebarHeader = ({
             </BootstrapFormControl>
           </form>
         </Box>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }

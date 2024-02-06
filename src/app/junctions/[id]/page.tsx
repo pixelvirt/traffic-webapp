@@ -1,43 +1,47 @@
+'use client'
+
+import { getCameras } from '@/app/lib/data'
 import CameraCard from '@/app/ui/components/CameraCard'
+import { usePathname } from 'next/navigation'
+import React from 'react'
 
 type Camera = {
+  id: number
   name: string
   ip: string
-  videoSource?: string
+  source: string
 }
 
-let cameras: Camera[] = [
-  {
-    name: 'Camera 1',
-    ip: '0.0.0.0',
-    videoSource: 'https://youtu.be/fh3EdeGNKus?feature=shared',
-  },
-  {
-    name: 'Camera 2',
-    ip: '1.1.1.1',
-    videoSource: 'https://youtu.be/iJZcjZD0fw0?feature=shared',
-  },
-  {
-    name: 'Camera 3',
-    ip: '2.2.2.2',
-    videoSource: 'https://youtu.be/wqctLW0Hb_0?feature=shared',
-  },
-  {
-    name: 'Camera 4',
-    ip: '3.3.3.3',
-    videoSource: 'https://youtu.be/7HaJArMDKgI?feature=shared',
-  },
-]
-
 export default function JunctionCameras() {
+  const pathname = usePathname()
+
+  const id = pathname.split('/').pop()
+  const [cameras, setCameras] = React.useState<Camera[]>([])
+
+  React.useEffect(() => {
+    console.log('id', id)
+    if (id !== undefined) {
+      getCameras({ junctionId: id }).then((data) => {
+        setCameras(data)
+      })
+    }
+  }, [id])
+
   return (
     <div className='grid w-full grid-flow-row auto-rows-min grid-cols-3 gap-3 px-5 pt-5'>
+      {
+        cameras.length === 0 && (
+          <div className='col-span-3 text-center text-2xl font-bold'>
+            No cameras found
+          </div>
+        )
+      }
       {cameras.map((camera) => (
         <CameraCard
-          key={camera.name}
+          key={camera.id}
           cameraName={camera.name}
           ipAddress={camera.ip}
-          source={camera.videoSource}
+          source={camera.source}
         />
       ))}
     </div>

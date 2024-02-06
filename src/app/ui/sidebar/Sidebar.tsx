@@ -1,17 +1,22 @@
+'use client'
+
 import { fetchAllJunctions } from '@/app/lib/data'
 import { Junction } from '@/app/lib/definitions'
 import Link from 'next/link'
 import React from 'react'
 import SidebarHeader from './SidebarHeader'
+import { usePathname } from 'next/navigation'
 // import { toast } from 'react-toastify'
 
-const Sidebar = async () => {
-  const junctions: Junction[] = await fetchAllJunctions()
-  // const [junctions, setJunctions] = React.useState([] as Junction[])
+function Sidebar() {
+  // const junctions: Junction[] = await fetchAllJunctions()
+  const [junctions, setJunctions] = React.useState([] as Junction[])
+  const pathname = usePathname()
+  const id = pathname.split('/').pop()
 
-  // React.useEffect(() => {
-  //   fetchAllJunctions().then((junctions) => setJunctions(junctions))
-  // })
+  React.useEffect(() => {
+    fetchAllJunctions().then((junctions) => setJunctions(junctions))
+  }, [id])
 
   // const updateJunctions = async () => {
   //   const updatedJunctions = await fetchAllJunctions()
@@ -34,7 +39,11 @@ const Sidebar = async () => {
         {junctions.map((junction) => (
           <Link
             key={junction.id}
-            className='w-full cursor-pointer rounded-md px-3 py-2 hover:bg-[#1a1a1a]'
+            className={`w-full cursor-pointer rounded-md px-3 py-2 hover:bg-[#1a1a1a] ${
+              (id !== undefined ? Number(id) : 0) === junction.id
+                ? 'bg-[#1a1a1a]'
+                : ''
+            }`}
             href={`/junctions/${junction.id}`}
           >
             {junction.name}
