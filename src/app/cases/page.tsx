@@ -1,7 +1,13 @@
-import React from 'react'
+import { useMemo } from 'react'
 
-const Cases = () => {
-  return <div className='px-10 pt-7'></div>
+type Case = {
+  objectID: number
+  violationType: string
+  Time: string
+  imagePath: string
+  cameraID: number
 }
 
-export default Cases
+export default function cases() {
+  return <></>
+}
