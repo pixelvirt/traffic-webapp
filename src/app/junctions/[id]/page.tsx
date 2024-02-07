@@ -19,7 +19,6 @@ export default function JunctionCameras() {
   const [cameras, setCameras] = React.useState<Camera[]>([])
 
   React.useEffect(() => {
-    console.log('id', id)
     if (id !== undefined) {
       getCameras({ junctionId: id }).then((data) => {
         setCameras(data)
