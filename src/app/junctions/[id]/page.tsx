@@ -1,7 +1,7 @@
 'use client'
 
 import { getCameras } from '@/lib/data'
-import CameraCard from '@/ui/components/CameraCard'
+import CameraCard from '@/components/CameraCard'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 

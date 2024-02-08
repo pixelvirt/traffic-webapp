@@ -20,7 +20,7 @@ function Sidebar() {
     fetchAllJunctions().then((junctions) => setJunctions(junctions))
   }, [id])
 
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true)
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
