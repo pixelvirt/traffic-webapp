@@ -1,0 +1,28 @@
+.sidebarContentDisappear {
+    animation: disappear 100ms;
+    display: none;
+}
+
+.sidebarContentAppear {
+    animation: appear 1s;
+}
+
+@keyframes disappear {
+    from {
+        display: flex;
+        width: 0%;
+    }
+    to {
+        opacity: 0;
+        width: 100%;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        display: flex;
+    }
+}

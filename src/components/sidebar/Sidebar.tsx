@@ -4,8 +4,10 @@ import { fetchAllJunctions } from '@/lib/data'
 import { Junction } from '@/lib/definitions'
 import Link from 'next/link'
 import React from 'react'
-import SidebarHeader from './SidebarHeader'
+import MenuIcon from '@mui/icons-material/Menu'
+// import SidebarHeader from './SidebarHeader'
 import { usePathname } from 'next/navigation'
+import styles from './Sidebar.module.css'
 // import { toast } from 'react-toastify'
 
 function Sidebar() {
@@ -17,6 +19,12 @@ function Sidebar() {
   React.useEffect(() => {
     fetchAllJunctions().then((junctions) => setJunctions(junctions))
   }, [id])
+
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true)
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+  }
 
   // const updateJunctions = async () => {
   //   const updatedJunctions = await fetchAllJunctions()
@@ -33,9 +41,38 @@ function Sidebar() {
   // }
 
   return (
-    <aside className='sticky top-16 h-[calc(100dvh-4rem)] min-w-64 border-r-2 border-[#2e2e2e] py-6 pl-5 pr-2'>
-      <SidebarHeader />
-      <div className='mt-6 flex flex-col gap-2'>
+    <aside
+      className={`sticky top-16 h-[calc(100dvh-4rem)] border-r-2 border-[#2e2e2e] py-6 pl-5 pr-2 transition-all duration-200 ease-in-out ${
+        isSidebarOpen ? 'min-w-64' : 'min-w-16 pl-2'
+      }`}
+    >
+      <div className='flex items-center justify-center'>
+        <h1
+          className={`flex-1 text-2xl font-bold ${
+            isSidebarOpen
+              ? styles.sidebarContentAppear
+              : styles.sidebarContentDisappear
+          }`}
+        >
+          Junctions
+        </h1>
+        <button
+          onClick={toggleSidebar}
+          className='cursor-pointer'
+          aria-label='Toggle Sidebar'
+          title='Toggle Sidebar'
+        >
+          <MenuIcon />
+        </button>
+      </div>
+      {/* <SidebarHeader /> */}
+      <div
+        className={`mt-6 flex flex-col gap-2 ${
+          isSidebarOpen
+            ? styles.sidebarContentAppear
+            : styles.sidebarContentDisappear
+        }`}
+      >
         {junctions.map((junction) => (
           <Link
             key={junction.id}

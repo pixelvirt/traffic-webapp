@@ -1,7 +1,7 @@
 'use client'
 
 import { getCameras } from '@/lib/data'
-import CameraCard from '@/ui/components/CameraCard'
+import CameraCard from '@/components/CameraCard/CameraCard'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
@@ -19,7 +19,6 @@ export default function JunctionCameras() {
   const [cameras, setCameras] = React.useState<Camera[]>([])
 
   React.useEffect(() => {
-    console.log('id', id)
     if (id !== undefined) {
       getCameras({ junctionId: id }).then((data) => {
         setCameras(data)
