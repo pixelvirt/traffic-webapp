@@ -4,9 +4,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.migmawei.ca',
+        hostname: 'placehold.co',
         port: '',
-        pathname: '/system/wp-content/uploads/2017/04/**',
+        pathname: '/**',
       },
     ],
   },

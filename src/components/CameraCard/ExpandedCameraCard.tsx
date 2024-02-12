@@ -5,32 +5,36 @@ import SwapVertIcon from '@mui/icons-material/SwapVert'
 import VideoPlayer from '../VideoPlayer'
 import LanIcon from '@mui/icons-material/Lan'
 
+type ExpandedCameraCardProps = {
+  cameraName: string
+  ipAddress: string
+  source: string | undefined
+  setExpanded: () => void
+}
+
 // Expanded Card
 export default function ExpandedCameraCard({
-  param,
+  cameraName,
+  ipAddress,
+  source,
   setExpanded,
-}: {
-  param: any
-  setExpanded: any
-}) {
+}: ExpandedCameraCardProps) {
   return (
     <div className='max-w-dvw absolute left-0 top-0 flex h-dvh w-dvw bg-black'>
       <button className='absolute right-7 top-7' onClick={setExpanded}>
         <CloseIcon />
       </button>
       <div className='aspect-video w-10/12'>
-        <VideoPlayer videoSource={param.source} />
+        <VideoPlayer videoSource={source} />
       </div>
       <div className='flex w-full flex-col px-5 pt-12'>
-        <h1 className='mb-6 flex items-center gap-4 text-2xl'>
-          {param.cameraName}
-        </h1>
+        <h1 className='mb-6 flex items-center gap-4 text-2xl'>{cameraName}</h1>
         <div className='flex flex-col gap-4'>
           {/* Camera Information */}
           <div className='flex flex-col gap-4'>
             <div className='flex items-center gap-4 text-sm'>
               <LanIcon titleAccess='IP Address' />
-              <p>{param.ipAddress}</p>
+              <p>{ipAddress}</p>
             </div>
             <div className='flex items-center gap-4 text-sm'>
               <SwapVertIcon titleAccess='Traffic flow' />

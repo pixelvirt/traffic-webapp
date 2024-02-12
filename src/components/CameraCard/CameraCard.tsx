@@ -20,7 +20,9 @@ const CameraCard = ({
     <>
       {expanded ? (
         <ExpandedCameraCard
-          param={{ cameraName, ipAddress, source }}
+          cameraName={cameraName}
+          ipAddress={ipAddress}
+          source={source}
           setExpanded={() => setExpanded(false)}
         />
       ) : (
