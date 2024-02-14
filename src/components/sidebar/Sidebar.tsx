@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 // import SidebarHeader from './SidebarHeader'
 import { usePathname } from 'next/navigation'
 import styles from './Sidebar.module.css'
+import { Button } from '../ui/button'
 // import { toast } from 'react-toastify'
 
 function Sidebar() {
@@ -74,17 +75,19 @@ function Sidebar() {
         }`}
       >
         {junctions.map((junction) => (
-          <Link
-            key={junction.id}
-            className={`w-full cursor-pointer rounded-md px-3 py-2 hover:bg-[#1a1a1a] ${
+          <Button
+            asChild
+            variant='ghost'
+            className={`w-full cursor-pointer justify-start px-3 py-2 ${
               (id !== undefined ? Number(id) : 0) === junction.id
-                ? 'bg-[#1a1a1a]'
+                ? 'bg-accent'
                 : ''
             }`}
-            href={`/junctions/${junction.id}`}
           >
-            {junction.name}
-          </Link>
+            <Link key={junction.id} href={`/junctions/${junction.id}`}>
+              {junction.name}
+            </Link>
+          </Button>
         ))}
       </div>
     </aside>

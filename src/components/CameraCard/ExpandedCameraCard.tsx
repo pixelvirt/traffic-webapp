@@ -20,7 +20,7 @@ export default function ExpandedCameraCard({
   setExpanded,
 }: ExpandedCameraCardProps) {
   return (
-    <div className='max-w-dvw absolute left-0 top-0 flex h-dvh w-dvw bg-black'>
+    <div className='max-w-dvw absolute left-0 top-0 flex h-dvh w-dvw bg-background'>
       <button className='absolute right-7 top-7' onClick={setExpanded}>
         <CloseIcon />
       </button>

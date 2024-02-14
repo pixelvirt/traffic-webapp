@@ -30,11 +30,7 @@ const NavigationComponent = ({
   const pathName = usePathname()
 
   return (
-    <li
-      className={
-        pathName.includes(navigationPath) ? 'font-medium' : 'text-white/75'
-      }
-    >
+    <li className={pathName.includes(navigationPath) ? 'font-medium' : ''}>
       <Link href={navigationPath}>{navigationLabel}</Link>
     </li>
   )
