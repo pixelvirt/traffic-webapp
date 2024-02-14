@@ -4,6 +4,8 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import { Flip, ToastContainer } from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
+import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeToggle } from '@/components/ui/theme-toggle-button'
 
 const roboto = Roboto({ weight: ['400', '500'], subsets: ['latin'] })
 
@@ -20,11 +22,21 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={roboto.className}>
-        <Navbar />
-        <main>
-          <ToastContainer transition={Flip} />
-          {children}
-        </main>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main>
+            <ToastContainer transition={Flip} />
+            {children}
+          </main>
+          <div className='absolute bottom-7 right-7'>
+            <ThemeToggle />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   )
