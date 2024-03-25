@@ -9,6 +9,8 @@ type ExpandedCameraCardProps = {
   cameraName: string
   ipAddress: string
   source: string | undefined
+  green: number
+  count: number
   setExpanded: () => void
 }
 
@@ -17,10 +19,12 @@ export default function ExpandedCameraCard({
   cameraName,
   ipAddress,
   source,
+  green,
+  count,
   setExpanded,
 }: ExpandedCameraCardProps) {
   return (
-    <div className='max-w-dvw absolute left-0 top-0 flex h-dvh w-dvw bg-background'>
+    <div className='max-w-dvw fixed left-0 top-0 flex h-dvh w-dvw overflow-hidden bg-background'>
       <button className='absolute right-7 top-7' onClick={setExpanded}>
         <CloseIcon />
       </button>
@@ -42,7 +46,7 @@ export default function ExpandedCameraCard({
             </div>
             <div className='flex items-center gap-4 text-sm'>
               <CommuteIcon titleAccess='Vehicle count' />
-              <p>42</p>
+              <p>{count}</p>
             </div>
           </div>
 
@@ -50,25 +54,25 @@ export default function ExpandedCameraCard({
           <div className='border-t border-white/50 pt-4'>
             <h2 className='text-lg'>Traffic Light Status</h2>
             <div className='mt-4'>
-              <div className='mt-4 flex items-center gap-4'>
+              {/* <div className='mt-4 flex items-center gap-4'>
                 <div className='h-8 w-8 rounded-full bg-red-500'></div>
                 <p>15 seconds</p>
               </div>
               <div className='mt-4 flex items-center gap-4'>
                 <div className='h-8 w-8 rounded-full bg-yellow-500'></div>
                 <p>10 seconds</p>
-              </div>
+              </div> */}
               <div className='mt-4 flex items-center gap-4'>
                 <div className='h-8 w-8 rounded-full bg-green-500'></div>
-                <p>5 seconds</p>
+                <p>{green} seconds</p>
               </div>
             </div>
-            <div className='mt-4 flex items-center gap-4'>
+            {/* <div className='mt-4 flex items-center gap-4'>
               <div className='flex h-8 w-8 items-center justify-center rounded-full border border-white/50 bg-white/20'>
                 <TurnRightIcon className='text-green-500' />
               </div>
               <p>20 seconds</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

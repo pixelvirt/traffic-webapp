@@ -76,6 +76,7 @@ function Sidebar() {
       >
         {junctions.map((junction) => (
           <Button
+            key={junction.id}
             asChild
             variant='ghost'
             className={`w-full cursor-pointer justify-start px-3 py-2 ${

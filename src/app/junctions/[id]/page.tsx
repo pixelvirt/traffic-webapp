@@ -10,6 +10,8 @@ type Camera = {
   name: string
   ip: string
   source: string
+  green: number
+  count: number
 }
 
 export default function JunctionCameras() {
@@ -39,6 +41,8 @@ export default function JunctionCameras() {
           cameraName={camera.name}
           ipAddress={camera.ip}
           source={camera.source}
+          green={camera.green}
+          count={camera.count}
         />
       ))}
     </div>
