@@ -27,9 +27,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main>
-            {children}
-          </main>
+          <main>{children}</main>
           <div className='fixed bottom-7 right-7'>
             <ThemeToggle />
           </div>

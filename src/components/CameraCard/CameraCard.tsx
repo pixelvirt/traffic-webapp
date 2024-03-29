@@ -55,7 +55,7 @@ function CompactCameraCard({
       onClick={setExpanded}
       className='border-primary-100 hover:bg-primary-100 flex max-h-min cursor-pointer flex-col gap-2 rounded-md border p-4'
     >
-      <div className='aspect-video'>
+      <div className='aspect-video overflow-hidden'>
         <VideoPlayer videoSource={source} />
       </div>
       <div>
