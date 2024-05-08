@@ -9,7 +9,9 @@ type Camera = {
   id: number
   name: string
   ip: string
-  source: string
+  video_feed_url: string
+  green: number
+  count: number
 }
 
 export default function JunctionCameras() {
@@ -24,7 +26,7 @@ export default function JunctionCameras() {
         setCameras(data)
       })
     }
-  }, [id])
+  }, [])
 
   return (
     <div className='grid w-full grid-flow-row auto-rows-min grid-cols-3 gap-3 px-5 pt-5'>
@@ -38,7 +40,9 @@ export default function JunctionCameras() {
           key={camera.id}
           cameraName={camera.name}
           ipAddress={camera.ip}
-          source={camera.source}
+          source={camera.video_feed_url}
+          green={camera.green}
+          count={camera.count}
         />
       ))}
     </div>

@@ -1,89 +1,32 @@
 'use client'
 
-import { Box, MenuItem, ThemeProvider, createTheme } from '@mui/material'
+import { getViolations } from '@/lib/data'
+import { Box, ThemeProvider, createTheme } from '@mui/material'
 import {
   MRT_ColumnDef,
   MRT_Table,
   useMaterialReactTable,
 } from 'material-react-table'
 import Image from 'next/image'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 
 type Case = {
-  objectID: number
-  violationType: string
-  Time: string
-  imagePath: string
-  cameraID: number
+  object_id: string
+  violation_type: string
+  violation_date_time: string
+  image_url: string
+  camera_id: number
 }
 
-const data: Case[] = [
-  {
-    objectID: 1,
-    violationType: 'Speeding',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 1,
-  },
-  {
-    objectID: 2,
-    violationType: 'Running Red Light',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 2,
-  },
-  {
-    objectID: 3,
-    violationType: 'Speeding',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 3,
-  },
-  {
-    objectID: 4,
-    violationType: 'Running Red Light',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 4,
-  },
-  {
-    objectID: 5,
-    violationType: 'Speeding',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 5,
-  },
-  {
-    objectID: 6,
-    violationType: 'Running Red Light',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 6,
-  },
-  {
-    objectID: 7,
-    violationType: 'Speeding',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 7,
-  },
-  {
-    objectID: 8,
-    violationType: 'Running Red Light',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 8,
-  },
-  {
-    objectID: 9,
-    violationType: 'Speeding',
-    Time: '2021-10-12 12:00:00',
-    imagePath: 'https://placehold.co/200/png',
-    cameraID: 9,
-  },
-]
-
 export default function cases() {
+  const [violations, setViolations] = React.useState<Case[]>([])
+
+  React.useEffect(() => {
+    getViolations().then((data) => {
+      setViolations(data)
+    })
+  }, [])
+
   const theme = createTheme({
     palette: {
       background: {
@@ -100,36 +43,54 @@ export default function cases() {
   const columns = useMemo<MRT_ColumnDef<Case>[]>(
     () => [
       {
-        accessorKey: 'objectID',
+        accessorFn: (row) => `${row.image_url}`,
+        id: 'image',
+        header: 'Image',
+        Cell: ({ row }) => {
+          return (
+            <Box>
+              <Image
+                src={row.original.image_url}
+                alt='image'
+                width={100}
+                height={100}
+              />
+            </Box>
+          )
+        },
+      },
+      {
+        accessorKey: 'violation_type',
+        header: 'Violation Type',
+        Cell: ({ row }) => {
+          let violationType = row.original.violation_type
+            .split('.')[1]
+            .split('_')
+            .join(' ')
+          return (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                textTransform: 'capitalize',
+                gap: 1,
+              }}
+            >
+              {violationType}
+            </Box>
+          )
+        },
+      },
+      {
+        accessorKey: 'violation_date_time',
+        header: 'Time',
+      },
+      {
+        accessorKey: 'object_id',
         header: 'ID',
       },
       {
-        accessorKey: 'violationType',
-        header: 'Violation Type',
-      },
-      {
-        accessorKey: 'Time',
-        header: 'Time',
-      },
-
-      {
-        accessorFn: (row) => `${row.imagePath}`,
-        id: 'image',
-        header: 'Image',
-        Cell: ({ row }) => (
-          <Box>
-            <Image
-              src={row.original.imagePath}
-              alt='image'
-              width={200}
-              height={400}
-            />
-          </Box>
-        ),
-      },
-
-      {
-        accessorKey: 'cameraID',
+        accessorKey: 'camera_id',
         header: 'Camera ID',
       },
     ],
@@ -138,8 +99,8 @@ export default function cases() {
 
   const table = useMaterialReactTable({
     columns,
-    data: data,
-    renderEmptyRowsFallback: ({ table }) => {
+    data: violations,
+    renderEmptyRowsFallback: () => {
       return (
         <div className='w-full py-6 text-center text-lg italic'>
           <p>No cases found</p>

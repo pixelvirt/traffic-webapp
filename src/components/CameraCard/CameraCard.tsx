@@ -10,10 +10,14 @@ const CameraCard = ({
   cameraName,
   ipAddress,
   source,
+  green,
+  count,
 }: {
   cameraName: string
   ipAddress: string
   source: string | undefined
+  green: number
+  count: number
 }) => {
   const [expanded, setExpanded] = React.useState(false)
   return (
@@ -23,6 +27,8 @@ const CameraCard = ({
           cameraName={cameraName}
           ipAddress={ipAddress}
           source={source}
+          green={green}
+          count={count}
           setExpanded={() => setExpanded(false)}
         />
       ) : (
@@ -47,9 +53,9 @@ function CompactCameraCard({
   return (
     <div
       onClick={setExpanded}
-      className='flex max-h-min cursor-pointer flex-col gap-2 rounded-md border border-primary-100 p-4 hover:bg-primary-100'
+      className='border-primary-100 hover:bg-primary-100 flex max-h-min cursor-pointer flex-col gap-2 rounded-md border p-4'
     >
-      <div className='aspect-video'>
+      <div className='aspect-video overflow-hidden'>
         <VideoPlayer videoSource={source} />
       </div>
       <div>

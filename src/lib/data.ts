@@ -39,3 +39,17 @@ export async function getCameras({ junctionId }: { junctionId: string }) {
 
   return res.json()
 }
+
+export async function getViolations() {
+  const res = await fetch(`${backend_url}/violations`, {
+    next: {
+      revalidate: 3600,
+    },
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+
+  return res.json()
+}
