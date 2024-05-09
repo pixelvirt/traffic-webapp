@@ -1,9 +1,9 @@
-import CloseIcon from '@mui/icons-material/Close'
-import CommuteIcon from '@mui/icons-material/Commute'
-import TurnRightIcon from '@mui/icons-material/TurnRight'
-import SwapVertIcon from '@mui/icons-material/SwapVert'
-import VideoPlayer from '../VideoPlayer'
-import LanIcon from '@mui/icons-material/Lan'
+import CloseIcon from "@mui/icons-material/Close"
+import CommuteIcon from "@mui/icons-material/Commute"
+import SwapVertIcon from "@mui/icons-material/SwapVert"
+import VideoPlayer from "../VideoPlayer"
+import LanIcon from "@mui/icons-material/Lan"
+import { Box, IconButton, Toolbar, Typography } from "@mui/material"
 
 type ExpandedCameraCardProps = {
   cameraName: string
@@ -24,58 +24,104 @@ export default function ExpandedCameraCard({
   setExpanded,
 }: ExpandedCameraCardProps) {
   return (
-    <div className='max-w-dvw fixed left-0 top-0 flex h-dvh w-dvw overflow-hidden bg-background'>
-      <button className='absolute right-7 top-7' onClick={setExpanded}>
-        <CloseIcon />
-      </button>
-      <div className='aspect-video w-10/12'>
+    <Box
+      sx={{
+        width: "100dvw",
+        position: "fixed",
+        left: "0",
+        top: "0",
+        display: "flex",
+        height: "100dvh",
+        overflow: "hidden",
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        backgroundColor: (theme) => theme.palette.background.paper,
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          top: "28px",
+          right: "28px",
+        }}
+      >
+        <IconButton onClick={setExpanded}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
+      <Box
+        sx={{
+          width: "83.33%",
+          height: "100%",
+        }}
+      >
         <VideoPlayer videoSource={source} />
-      </div>
-      <div className='flex w-full flex-col px-5 pt-12'>
-        <h1 className='mb-6 flex items-center gap-4 text-2xl'>{cameraName}</h1>
-        <div className='flex flex-col gap-4'>
+      </Box>
+      <Box sx={{
+        px: "20px"
+      }} className="flex w-full flex-col px-5 pt-12">
+        <Toolbar />
+        <Typography
+          component="h1"
+          variant="h5"
+          sx={{
+            marginBottom: "1.5rem",
+          }}
+        >
+          {cameraName}
+        </Typography>
+        <Box className="flex flex-col gap-4">
           {/* Camera Information */}
-          <div className='flex flex-col gap-4'>
-            <div className='flex items-center gap-4 text-sm'>
-              <LanIcon titleAccess='IP Address' />
-              <p>{ipAddress}</p>
-            </div>
-            <div className='flex items-center gap-4 text-sm'>
-              <SwapVertIcon titleAccess='Traffic flow' />
-              <p>Incoming from Chabahil</p>
-            </div>
-            <div className='flex items-center gap-4 text-sm'>
-              <CommuteIcon titleAccess='Vehicle count' />
-              <p>{count}</p>
-            </div>
-          </div>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <LanIcon titleAccess="IP Address" />
+            <p>{ipAddress}</p>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <SwapVertIcon titleAccess="Traffic flow" />
+            <p>Incoming from Chabahil</p>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <CommuteIcon titleAccess="Vehicle count" />
+            <p>{count}</p>
+          </Box>
 
-          {/* Traffic Light Status */}
-          <div className='border-t border-white/50 pt-4'>
-            <h2 className='text-lg'>Traffic Light Status</h2>
-            <div className='mt-4'>
-              {/* <div className='mt-4 flex items-center gap-4'>
-                <div className='h-8 w-8 rounded-full bg-red-500'></div>
-                <p>15 seconds</p>
-              </div>
-              <div className='mt-4 flex items-center gap-4'>
-                <div className='h-8 w-8 rounded-full bg-yellow-500'></div>
-                <p>10 seconds</p>
-              </div> */}
-              <div className='mt-4 flex items-center gap-4'>
-                <div className='h-8 w-8 rounded-full bg-green-500'></div>
-                <p>{green} seconds</p>
-              </div>
-            </div>
-            {/* <div className='mt-4 flex items-center gap-4'>
-              <div className='flex h-8 w-8 items-center justify-center rounded-full border border-white/50 bg-white/20'>
-                <TurnRightIcon className='text-green-500' />
-              </div>
-              <p>20 seconds</p>
-            </div> */}
-          </div>
-        </div>
-      </div>
-    </div>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <Box
+              sx={{
+                height: "32px",
+                width: "32px",
+                borderRadius: "100%",
+                backgroundColor: "green",
+              }}
+              className="h-8 w-8 rounded-full bg-green-500"
+            ></Box>
+            <p>{green} seconds</p>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   )
 }

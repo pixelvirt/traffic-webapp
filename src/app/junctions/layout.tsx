@@ -1,5 +1,5 @@
-import BreadCrumbs from '@/components/Breadcrumb'
-import Sidebar from '@/components/sidebar/Sidebar'
+import Sidebar from "@/components/sidebar/Sidebar"
+import { Box, Toolbar } from "@mui/material"
 
 export default async function Layouts({
   children,
@@ -7,19 +7,12 @@ export default async function Layouts({
   children: React.ReactNode
 }) {
   return (
-    <div className='flex'>
+    <Box sx={{ display: "flex" }}>
       <Sidebar />
-      <div className='flex w-full flex-col'>
-        <BreadCrumbs
-          homeElement={'Home'}
-          separator={<span> &gt; </span>}
-          activeClasses='text-white font-bold'
-          containerClasses='flex py-5 pl-4'
-          listClasses='hover:underline mx-2 fon-bold'
-          capitalizeLinks
-        />
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
         {children}
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
