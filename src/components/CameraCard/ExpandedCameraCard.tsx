@@ -1,9 +1,10 @@
 import CloseIcon from "@mui/icons-material/Close"
+import DeleteIcon from "@mui/icons-material/Delete"
 import CommuteIcon from "@mui/icons-material/Commute"
 import SwapVertIcon from "@mui/icons-material/SwapVert"
 import VideoPlayer from "../VideoPlayer"
 import LanIcon from "@mui/icons-material/Lan"
-import { Box, IconButton, Toolbar, Typography } from "@mui/material"
+import { Box, IconButton, Toolbar, Tooltip, Typography } from "@mui/material"
 
 type ExpandedCameraCardProps = {
   cameraName: string
@@ -44,9 +45,11 @@ export default function ExpandedCameraCard({
           right: "28px",
         }}
       >
-        <IconButton onClick={setExpanded}>
-          <CloseIcon />
-        </IconButton>
+        <Tooltip title="Close">
+          <IconButton aria-label="close" onClick={setExpanded}>
+            <CloseIcon />
+          </IconButton>
+        </Tooltip>
       </Box>
       <Box
         sx={{
@@ -56,10 +59,13 @@ export default function ExpandedCameraCard({
       >
         <VideoPlayer videoSource={source} />
       </Box>
-      <Box sx={{
-        px: "20px"
-      }} className="flex w-full flex-col px-5 pt-12">
-        <Toolbar />
+      <Box
+        sx={{
+          px: "20px",
+          pt: "32px",
+        }}
+        className="flex w-full flex-col px-5 pt-12"
+      >
         <Typography
           component="h1"
           variant="h5"
