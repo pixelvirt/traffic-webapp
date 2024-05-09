@@ -1,10 +1,10 @@
-'use server'
+"use server"
 
 const backend_url = process.env.BACKEND_URL
 
 export async function fetchAllJunctions() {
   return await fetch(`${backend_url}/junctions`, {
-    cache: 'no-store',
+    cache: "no-store",
   })
     .then((res) => {
       return res.json()
@@ -16,25 +16,27 @@ export async function fetchAllJunctions() {
 
 export async function addJunction({ junctionName }: { junctionName: string }) {
   fetch(`${backend_url}/junctions`, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({
       name: junctionName,
     }),
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   })
 }
 
 export async function getCameras({ junctionId }: { junctionId: string }) {
   const res = await fetch(`${backend_url}/junctions/${junctionId}/cameras`, {
+    cache: "no-cache",
     next: {
       revalidate: 3600,
     },
   })
 
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    console.log("Failed to get cameras from api")
+    return []
   }
 
   return res.json()
@@ -48,7 +50,7 @@ export async function getViolations() {
   })
 
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error("Failed to fetch data")
   }
 
   return res.json()
