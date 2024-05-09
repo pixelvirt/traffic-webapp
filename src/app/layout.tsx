@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
-import { ThemeToggle } from '@/components/ui/theme-toggle-button'
 
 const roboto = Roboto({ weight: ['400', '500'], subsets: ['latin'] })
 
@@ -21,9 +20,6 @@ export default function RootLayout({
       <body className={roboto.className}>
         <Navbar />
         <main>{children}</main>
-        <div className='fixed bottom-7 right-7'>
-          <ThemeToggle />
-        </div>
       </body>
     </html>
   )
