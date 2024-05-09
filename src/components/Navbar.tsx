@@ -1,8 +1,14 @@
 "use client"
 
-import { AppBar, Button, List, ListItemButton, Toolbar } from "@mui/material"
+import {
+  AppBar,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+} from "@mui/material"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import React from "react"
 
 type NavigationItem = {
@@ -34,10 +40,14 @@ const Navbar = () => {
             ml: "16px",
           }}
         >
-          {navigationItems.map((item) => (
-            <Link href={item.path} key={item.label}>
-              <Button>{item.label}</Button>
-            </Link>
+          {navigationItems.map((item, index) => (
+            <ListItem key={index} disablePadding>
+              <Link href={item.path} passHref legacyBehavior>
+                <ListItemButton component="a">
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
           ))}
         </List>
       </Toolbar>

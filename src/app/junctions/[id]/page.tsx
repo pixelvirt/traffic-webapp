@@ -1,9 +1,10 @@
-'use client'
+"use client"
 
-import { getCameras } from '@/lib/data'
-import CameraCard from '@/components/CameraCard/CameraCard'
-import { usePathname } from 'next/navigation'
-import React from 'react'
+import { getCameras } from "@/lib/data"
+import CameraCard from "@/components/CameraCard/CameraCard"
+import { usePathname } from "next/navigation"
+import React from "react"
+import { Container, Grid, Typography } from "@mui/material"
 
 type Camera = {
   id: number
@@ -17,7 +18,7 @@ type Camera = {
 export default function JunctionCameras() {
   const pathname = usePathname()
 
-  const id = pathname.split('/').pop()
+  const id = pathname.split("/").pop()
   const [cameras, setCameras] = React.useState<Camera[]>([])
 
   React.useEffect(() => {
@@ -28,23 +29,35 @@ export default function JunctionCameras() {
     }
   }, [])
 
+  if (cameras.length <= 0) {
+    return (
+      <Container
+        sx={{
+          display: "flex",
+          flexGrow: "1",
+          height: "80dvh",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="h4">No Cameras Found</Typography>
+      </Container>
+    )
+  }
+
   return (
-    <div className='grid w-full grid-flow-row auto-rows-min grid-cols-3 gap-3 px-5 pt-5'>
-      {cameras.length === 0 && (
-        <div className='col-span-3 text-center text-2xl font-bold'>
-          No cameras found
-        </div>
-      )}
+    <Grid container spacing={2}>
       {cameras.map((camera) => (
-        <CameraCard
-          key={camera.id}
-          cameraName={camera.name}
-          ipAddress={camera.ip}
-          source={camera.video_feed_url}
-          green={camera.green}
-          count={camera.count}
-        />
+        <Grid key={camera.id} item xs={4}>
+          <CameraCard
+            cameraName={camera.name}
+            ipAddress={camera.ip}
+            source={camera.video_feed_url}
+            green={camera.green}
+            count={camera.count}
+          />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   )
 }

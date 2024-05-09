@@ -1,7 +1,7 @@
 "use client"
 
 import { getViolations } from "@/lib/data"
-import { Box, ThemeProvider, createTheme } from "@mui/material"
+import { Box, ThemeProvider, Toolbar, createTheme } from "@mui/material"
 import {
   MRT_ColumnDef,
   MRT_Table,
@@ -102,15 +102,16 @@ export default function Cases() {
     data: violations,
     renderEmptyRowsFallback: () => {
       return (
-        <div className="w-full py-6 text-center text-lg italic">
+        <Box sx={{ w: "100%", py: "24px", textAlign: "center" }}>
           <p>No cases found</p>
-        </div>
+        </Box>
       )
     },
   })
   return (
-    <ThemeProvider theme={theme}>
+    <Box>
+      <Toolbar />
       <MRT_Table table={table} />
-    </ThemeProvider>
+    </Box>
   )
 }

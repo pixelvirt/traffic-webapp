@@ -1,10 +1,11 @@
-'use client'
+"use client"
 
-import VideocamIcon from '@mui/icons-material/Videocam'
-import LanIcon from '@mui/icons-material/Lan'
-import React from 'react'
-import VideoPlayer from '../VideoPlayer'
-import ExpandedCameraCard from './ExpandedCameraCard'
+import VideocamIcon from "@mui/icons-material/Videocam"
+import LanIcon from "@mui/icons-material/Lan"
+import React from "react"
+import VideoPlayer from "../VideoPlayer"
+import ExpandedCameraCard from "./ExpandedCameraCard"
+import { Box, Card, Tooltip, Typography } from "@mui/material"
 
 const CameraCard = ({
   cameraName,
@@ -51,22 +52,57 @@ function CompactCameraCard({
 }) {
   const { cameraName, ipAddress, source } = param
   return (
-    <div
-      onClick={setExpanded}
-      className='border-primary-100 hover:bg-primary-100 flex max-h-min cursor-pointer flex-col gap-2 rounded-md border p-4'
-    >
-      <div className='aspect-video overflow-hidden'>
-        <VideoPlayer videoSource={source} />
-      </div>
-      <div>
-        <p className='flex items-center gap-2 text-sm'>
-          <VideocamIcon /> <span>{cameraName}</span>
-        </p>
-        <p className='flex items-center gap-2 text-sm'>
-          <LanIcon /> {ipAddress}
-        </p>
-      </div>
-    </div>
+    <Tooltip title="Expand Video" placement="top">
+      <Card
+        onClick={setExpanded}
+        variant="outlined"
+        sx={{
+          cursor: "pointer",
+        }}
+      >
+        <Box
+          sx={{
+            aspectRatio: 16 / 9,
+          }}
+        >
+          <VideoPlayer videoSource={source} />
+        </Box>
+        <Box
+          sx={{
+            px: 2,
+            py: 2,
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <VideocamIcon />
+            <Typography component={"p"} variant="body1">
+              {cameraName}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <LanIcon />{" "}
+            <Typography component={"p"} variant="body1">
+              {ipAddress}
+            </Typography>
+          </Box>
+        </Box>
+      </Card>
+    </Tooltip>
   )
 }
 
