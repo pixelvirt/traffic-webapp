@@ -1,8 +1,9 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import React from 'react'
+import { AppBar, Button, List, ListItemButton, Toolbar } from "@mui/material"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import React from "react"
 
 type NavigationItem = {
   label: string
@@ -11,44 +12,36 @@ type NavigationItem = {
 
 const navigationItems: NavigationItem[] = [
   {
-    label: 'Junctions',
-    path: '/junctions',
+    label: "Junctions",
+    path: "/junctions",
   },
   {
-    label: 'Cases',
-    path: '/cases',
+    label: "Cases",
+    path: "/cases",
   },
 ]
 
-const NavigationComponent = ({
-  navigationPath,
-  navigationLabel,
-}: {
-  navigationPath: string
-  navigationLabel: string
-}) => {
-  const pathName = usePathname()
-
-  return (
-    <li className={pathName.includes(navigationPath) ? 'font-medium' : ''}>
-      <Link href={navigationPath}>{navigationLabel}</Link>
-    </li>
-  )
-}
-
 const Navbar = () => {
   return (
-    <div className='sticky top-0 flex h-16 w-full items-center border-b-2 border-[#2e2e2e] bg-inherit px-14'>
-      <ul className='flex gap-4'>
-        {navigationItems.map((item) => (
-          <NavigationComponent
-            key={item.label}
-            navigationPath={item.path}
-            navigationLabel={item.label}
-          />
-        ))}
-      </ul>
-    </div>
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
+      <Toolbar>
+        <List
+          sx={{
+            display: "flex",
+            ml: "16px",
+          }}
+        >
+          {navigationItems.map((item) => (
+            <Link href={item.path} key={item.label}>
+              <Button>{item.label}</Button>
+            </Link>
+          ))}
+        </List>
+      </Toolbar>
+    </AppBar>
   )
 }
 

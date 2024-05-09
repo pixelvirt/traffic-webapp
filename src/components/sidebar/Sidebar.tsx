@@ -1,52 +1,55 @@
-'use client'
+"use client"
 
-import { fetchAllJunctions } from '@/lib/data'
-import { Junction } from '@/lib/definitions'
-import Link from 'next/link'
-import React from 'react'
-import { usePathname } from 'next/navigation'
-import styles from './Sidebar.module.css'
-import { Button } from '@mui/material'
+import { fetchAllJunctions } from "@/lib/data"
+import { Junction } from "@/lib/definitions"
+import Link from "next/link"
+import React from "react"
+import { usePathname } from "next/navigation"
+import {
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+} from "@mui/material"
+
+const drawerWidth = 240
 
 function Sidebar() {
   const [junctions, setJunctions] = React.useState([] as Junction[])
   const pathname = usePathname()
-  const id = pathname.split('/').pop()
+  const id = pathname.split("/").pop()
 
   React.useEffect(() => {
     fetchAllJunctions().then((junctions) => setJunctions(junctions))
   }, [id])
 
   return (
-    <aside
-      className={`sticky top-16 h-[calc(100dvh-4rem)] min-w-64 border-r-2 border-[#2e2e2e] py-6 pl-5 pr-2 transition-all duration-200 ease-in-out`}
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: "border-box" },
+      }}
     >
-      <div className='flex items-center justify-center'>
-        <h1
-          className={`flex-1 text-2xl font-bold ${styles.sidebarContentAppear}`}
-        >
-          Junctions
-        </h1>
-      </div>
-      <div
-        className={`mt-6 flex flex-col gap-2 ${styles.sidebarContentAppear}`}
-      >
-        {junctions.map((junction) => (
-          <Button
-            key={junction.id}
-            className={`w-full cursor-pointer justify-start px-3 py-2 ${
-              (id !== undefined ? Number(id) : 0) === junction.id
-                ? 'bg-accent'
-                : ''
-            }`}
-          >
-            <Link key={junction.id} href={`/junctions/${junction.id}`}>
-              {junction.name}
-            </Link>
-          </Button>
-        ))}
-      </div>
-    </aside>
+      <Toolbar />
+      <Box sx={{ overflow: "auto" }}>
+        <List>
+          {junctions.map((junction, index) => (
+            <ListItem key={index} disablePadding>
+              <Link href={`/junctions/${junction.id}`} passHref legacyBehavior>
+                <ListItemButton component="a">
+                  <ListItemText primary={junction.name} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </Drawer>
   )
 }
 
