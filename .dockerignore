@@ -1,0 +1,12 @@
+.env*
+node_modules
+.next
+README.md
+Dockerfile
+docker-compose.yml
+.dockerignore
+.git
+.gitignore
+.eslintrc.json
+.prettierrc
+
