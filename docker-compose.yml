@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    image: traffic-webapp
+    build:
+      context: ./
+      target: dev
+      dockerfile: Dockerfile
+    volumes:
+        - /app/node_modules
+        - /app/.next
+    ports:
+      - "5050:3000"
+    container_name: traffic-webapp-container
+    env_file:
+      - ./.env.local
