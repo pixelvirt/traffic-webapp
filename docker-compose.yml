@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    image: traffic-webapp
+    image: ghcr.io/pixelvirt/traffic-webapp:latest
     build:
       context: ./
       target: dev
